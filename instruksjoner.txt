@@ -1,0 +1,3 @@
+Kjør denne kommandoen: pip install -r install.txt
+
+Kopier .env.example til en .env fil og legg inn subscription key og endpoint

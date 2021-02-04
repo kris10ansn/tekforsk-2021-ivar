@@ -1,0 +1,4 @@
+pillow
+azure-cognitiveservices-vision-computervision
+python-dotenv
+picamera
