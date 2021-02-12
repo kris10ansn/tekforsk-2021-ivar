@@ -21,14 +21,18 @@ def recognize_text(image_path):
     image = open(image_path, "rb")
     results = client.recognize_printed_text_in_stream(image)
 
-    text = ""
+    text = []
     for region in results.regions:
+        region_text = ""
+
         for line in region.lines:
             line_text = ""
             for word in line.words:
                 line_text += " " + word
 
-            text += line_text + "\n"
+            region_text += line_text + "\n"
+
+        text.append(region_text)
 
     return text
 
