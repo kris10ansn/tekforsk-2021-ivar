@@ -6,9 +6,17 @@ import os
 import io
 import time
 import picamera
+import json
 from datetime import datetime
+import mysql.connector
 
 load_dotenv()
+
+db_cursor = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password=""
+)
 
 
 def recognize_text(image_path):
@@ -28,7 +36,7 @@ def recognize_text(image_path):
         for line in region.lines:
             line_text = ""
             for word in line.words:
-                line_text += " " + word
+                line_text += word + " "
 
             region_text += line_text + "\n"
 
@@ -48,7 +56,8 @@ def capture_image():
 def capture():
     image = capture_image()
     text = recognize_text(image)
-    print(text)
+    jsonified_text = json.dumps(text)
+    print(jsonified_text)
 
 
 capture()

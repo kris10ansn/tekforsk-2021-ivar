@@ -2,3 +2,4 @@ pillow
 azure-cognitiveservices-vision-computervision
 python-dotenv
 picamera
+mysql-connector-python
