@@ -21,21 +21,30 @@ def recognize_text(image_path):
     image = open(image_path, "rb")
     results = client.recognize_printed_text_in_stream(image)
 
+    text = ""
     for region in results.regions:
         for line in region.lines:
+            line_text = ""
             for word in line.words:
-                print(word.text)
+                line_text += " " + word
+
+            text += line_text + "\n"
+
+    return text
 
 
 def capture_image():
     path = "./data/" + str(datetime.utcnow()) + ".png"
     with picamera.PiCamera() as camera:
-        camera.start_preview()
-        time.sleep(5)
         camera.capture(path)
 
     return path
 
 
-image_path = capture_image()
-recognize_text(image_path)
+def capture():
+    image = capture_image()
+    text = recognize_text(image)
+    print(text)
+
+
+capture()
